@@ -14,12 +14,15 @@ public class PlayerMovement : MonoBehaviour
     public Transform launchPoint;           // Un GameObject vac�o en la posici�n de disparo
     public float launchForce = 20f;
     private GameManager gameManager;
+    private AudioSource audioSource;
+    public AudioClip proyectilSound; // Asigna el sonido de lanzamiento en el inspector
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.StartGame();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -41,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
             GameObject missile = Instantiate(missilePrefab, launchPoint.position, finalRotation);
             Rigidbody rb = missile.GetComponent<Rigidbody>();
+            audioSource.PlayOneShot(proyectilSound, 2f); // Reproducir sonido de lanzamiento
             if (rb != null)
             {
                 rb.velocity = launchPoint.forward * launchForce;

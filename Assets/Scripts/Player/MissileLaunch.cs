@@ -9,8 +9,8 @@ public class MissileLaunch : MonoBehaviour
     public Vector3 boundsMin = new Vector3(-10f, -10f, -10f); // Ajusta seg�n el nivel
     public Vector3 boundsMax = new Vector3(10f, 10f, 10f);
     private GameManager gameManager;
-    private int pointToAdd = 5; // Puntos que se suman al destruir un objetivo
-    private int pointToSubtract = -3;// Puntos que se restan al destruir un objetivo
+    private int pointsToAdd = 5; // Puntos que se suman al destruir un objetivo
+    private int pointsToSubtract = -3;// Puntos que se restan al destruir un objetivo
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -37,14 +37,14 @@ public class MissileLaunch : MonoBehaviour
 
             Destroy(other.gameObject);
             Destroy(gameObject);
-            gameManager.UpdateScore(pointToAdd); // Aumenta el puntaje al destruir un objetivo
+            gameManager.UpdateScore(pointsToAdd); // Aumenta el puntaje al destruir un objetivo
         }
         if (other.CompareTag("Fruit"))
         {
 
             Destroy(other.gameObject);
             Destroy(gameObject);
-            gameManager.UpdateScore(pointToSubtract); // Aumenta el puntaje al destruir un objetivo
+            gameManager.UpdateScore(pointsToSubtract); // Aumenta el puntaje al destruir un objetivo
         }
     }
 }
